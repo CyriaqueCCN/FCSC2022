@@ -1,0 +1,9 @@
+Argh, throwbacks from the high school logic class.
+Gates to the left are AND, gates to the right are XOR
+The little dot in the bottom input of each AND is a NOT
+
+we write a little C script for computing it
+prints the flag
+
+FCSC{10111}
+

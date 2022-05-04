@@ -1,0 +1,12 @@
+A quick search in the source code reveals a suspicious file : stegano.jpg
+
+A stegoveritas analysis reveals some hidden text in the image : the message "Bienvenue à l'épreuve zéro du FCSC 2022 ! :-)" with some UTF-8 dinosaurs
+The message itself isn't the flag (even encapsulated in the FCSC{} tag) so it must means that it's deeper in the picture.
+
+Looking at the file in hex mode doesn't provide us any significant information nor usable string
+
+An EXIF analysis yields a youtube link, which is of course a rickroll (if you don't know the URL by heart at this point, it's on you)
+
+We need to go deeper.
+
+
