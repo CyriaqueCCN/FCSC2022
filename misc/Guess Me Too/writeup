@@ -1,0 +1,45 @@
+# nombre secret sur 16 octets ou 128 bits
+
+[ x129, x128, x127, x126, ..., x1, x0]
+
+flag is
+
+FCSC{e055ea6ffd540907c52a34bef47cbf79758e6732af597d98c33aceade78979c5}
+
+
+parité à n bits :
+
+1ere méthode :
+envoyer n^0...n^127 bits pour chaque occurence du nombre (128 entrées)
+faire une dichotomie de chaque côté pour trouver l'erreur (7 entrées)
+utiliser le dernier nombre pour vérifier si l'erreur ne se trouve pas dans les 8 dernières (1 entrée, optionnelle)
+
+n0 = 11111111
+n1 = 00001111
+n2 = 00110011
+n3 = 01010101 etc
+
+
+3 cas : 
+si erreur dans les 7 derniers : secret == odd(n0)
+si erreur dans n0 : secret != odd(n0)
+sinon, erreur dans secret : dichotomie
+
+dichotomie :
+
+bits_at = [1, 2, 4, 8, 16] # 128 entiers, 1 pour chaque bit de la solution (STR !)
+e_corr = [1111, 0011, 0101...] # 8 entiers de dichotomie (STR !)
+sec_bits = [1, 0, 0, ... , 1, 0] # 128 entiers donnant le nombre secret avec erreur
+sec_err = [1, 0, 1, 0, 0, 1, 1, 1] # 8 bits de dichotomie (int)
+sec_orig = 188523174722555 # entier donnant le nombre secret avec erreur (si elle se trouve bien dans celui là)
+
+def get_error(sec_orig, e_corr, sec_err, i=0, chem=[]):
+    # erreur dans moitié gauche ou droite
+    if i > 6:
+	return []
+    else:
+	if odd(sec_orig & e_corr[i]) == sec_err[i]: # erreur moitie gauche
+	    return ['L'] + get_error(sec_orig, e_corr, sec_err, i+1)
+	else:
+	    return ['R'] + get_error(sec_orig, e_corr, sec_err, i+1)
+	    # erreur moitié droite

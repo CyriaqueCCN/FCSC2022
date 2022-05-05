@@ -1,0 +1,10 @@
+no shell function present in the file
+
+shows us a pointer somewhere in the stack
+creates a char[32] buffer
+reads 512 bytes into it (Overflow)
+does weird metal shit then exits
+
+we can infer that the binary has protection mechanisms and the pointer is there to help us bypass them
+the name suggests we need to use gadgets to ROP into a shellcode
+but how ?
