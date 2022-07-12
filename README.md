@@ -11,7 +11,7 @@ Most of the writeups are in english but I rewrote some of them in french to help
 
 Some of the cool ones :
 
-##### [XoraaS](pwn/xoraas/writeup.fr.md)
+##### [XoraaS](pwn/XORaaS/writeup.fr.md)
 
 Binary exploitation challenge : Overwrite the last byte of RBP with an off-by-one buffer overflow to push a controled address on RIP
 
@@ -19,6 +19,6 @@ Binary exploitation challenge : Overwrite the last byte of RBP with an off-by-on
 
 Binary exploitation challenge : Defeat PIE and ASLR with a leaked function pointer using ROP and ret2plt
 
-##### [Guess Me Too](misc/Guess_Me_Too/writeup.fr.md)
+##### [Guess me too](misc/Guess_me_too/writeup.fr.md)
 
 Programming challenge : a "guess the number" with a limited amounts of bits of information where the server had the right to lie once when answering.
