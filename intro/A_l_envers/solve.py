@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from pwn import *
 
 url = "challenges.france-cybersecurity-challenge.fr"
@@ -16,6 +18,6 @@ while nc.connected('any'):
     nc.sendline(line.encode())
     res = nc.readlineS(False)
     print(f"{l} : {line} ==> {res}")
-    if res.startswith("Oops. Bye bye"):# or res.startswith("Congratulations"):
+    if res.startswith("Oops. Bye bye"):
         nc.close()
         break

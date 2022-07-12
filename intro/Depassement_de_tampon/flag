@@ -1,6 +1,0 @@
-We need to do a buffer overflow to get to the address of the shell
-
-nc challenges.france-cybersecurity-challenge.fr 2050
-
-prints 2 addresses
-receives 100 chars in a [36] buffer

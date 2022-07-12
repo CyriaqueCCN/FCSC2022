@@ -1,8 +1,0 @@
-3 functions : main, xor and shell
-
-shell is our target
-
-main creates a char[128] buffer, reads 128 chars into it (no overflow there) then calls xor on it, writes it to stdout (still len 128, no overflow) and exits
-
-xor is interesting
-creates a char[140] then xor 128 times the value of ?

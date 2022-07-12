@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def get_y(x, i):
     if i == 0:
         xm1 = (x >> 62) & 1

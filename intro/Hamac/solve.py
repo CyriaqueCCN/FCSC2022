@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # python3 -m pip install pycryptodome
 import json
 from Crypto.Cipher import AES

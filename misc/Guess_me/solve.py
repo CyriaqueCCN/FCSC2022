@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from pwn import *
 
 url = "challenges.france-cybersecurity-challenge.fr"
@@ -18,11 +20,8 @@ for a in range(16):
     x_max = LONG_LONG_MAX
     print(f"Finding {a}")
     while not found or i > 65:
-        #res = nc.readlineS(False) # discard prompt
-        #epr(x)
         nc.sendline(str(x).encode())
         res = nc.readlineS(False).strip("> \n")
-        #epr(res)
         if res.startswith("+1"):
             x_min = x
             x = x + ((x_max - x) // 2)

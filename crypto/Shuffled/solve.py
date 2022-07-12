@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import random
 
 rl = list("f668cf029d2dc4234394e3f7a8S9f15f626Cc257Ce64}2dcd93323933d2{F1a1cd29db")

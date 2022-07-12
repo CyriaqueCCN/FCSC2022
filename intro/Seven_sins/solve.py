@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # F = a, f, g, e
 # C = a, f, e, d
 # S = a, f, g, c, d
